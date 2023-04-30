@@ -1,0 +1,121 @@
+---
+title: "Zinc supplementation on Prediabetes"
+author: "Kadek Adit Wiryadana"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Preparation
+### Load package
+```{r}
+library(tidyverse)
+library(meta)
+library(googlesheets4)
+```
+
+
+### Import Data
+
+#### Import data & save locally
+```{r eval=FALSE, include=FALSE}
+data <- read_sheet("https://docs.google.com/spreadsheets/d/1W4YqKc7r_4rf47tSD635Ztq8n4g3srQdw6eaFJYKi70/edit#gid=0")
+write_csv(data, "data.csv")
+
+```
+
+#### Import data from local storage
+```{r}
+data <- read_csv("data.csv")
+#attach(data)
+```
+
+### Analysis
+
+#### Metanalysis Fasting Plasma Glucose
+
+```{r fpg, fig.align='center', fig.width=12, fig.height=4}
+fpg <- metacont(n.e = total_zinc,
+                mean.e = mean_fpg_zinc,
+                sd.e = sd_fpg_zinc,
+                n.c = total_placebo,
+                mean.c = mean_fpg_placebo,
+                sd.c = sd_fpg_placebo,
+                data = data,
+                studlab = paste0(author,", ",year))
+print(summary(fpg), digits = 2)
+
+meta::forest(fpg,
+             digits = 2,
+             sortvar = year,
+             label.e = "Zinc",
+             label.c = "Placebo",
+             xlim = c(-15,15))
+```
+
+#### Metanalysis Insulin Sensitivity Index
+
+```{r insens, fig.align='center', fig.width=12, fig.height=4}
+insens <- metacont(n.e = total_zinc,
+                mean.e = mean_InSens_zinc,
+                sd.e = sd_InSens_zinc,
+                n.c = total_placebo,
+                mean.c = mean_InSens_placebo,
+                sd.c = sd_InSens_placebo,
+                data = data[-2,],
+                studlab = paste0(author,", ",year))
+print(summary(insens), digits = 2)
+
+meta::forest(insens,
+             digits = 2,
+             sortvar = year,
+             label.e = "Zinc",
+             label.c = "Placebo",
+             #xlim = c(-15,15)
+             )
+```
+
+#### Metanalysis Insulin Resistance Index
+
+```{r inres, fig.align='center', fig.width=12, fig.height=4}
+inres <- metacont(n.e = total_zinc,
+                mean.e = mean_InRes_zinc,
+                sd.e = sd_InRes_zinc,
+                n.c = total_placebo,
+                mean.c = mean_InRes_placebo,
+                sd.c = sd_InRes_placebo,
+                data = data,
+                studlab = paste0(author,", ",year))
+print(summary(inres), digits = 2)
+
+meta::forest(inres,
+             digits = 2,
+             sortvar = year,
+             label.e = "Zinc",
+             label.c = "Placebo",
+             #xlim = c(-15,15)
+             )
+```
+
+#### Metanalysis Beta Cell Function
+
+```{r betafunc, fig.align='center', fig.width=12, fig.height=4}
+beta <- metacont(n.e = total_zinc,
+                mean.e = mean_BetaFunc_zinc,
+                sd.e = sd_BetaFunc_zinc,
+                n.c = total_placebo,
+                mean.c = mean_BetaFunc_placebo,
+                sd.c = sd_BetaFunc_placebo,
+                data = data[-1,],
+                studlab = paste0(author,", ",year))
+print(summary(beta), digits = 2)
+
+meta::forest(beta,
+             digits = 2,
+             sortvar = year,
+             label.e = "Zinc",
+             label.c = "Placebo",
+             #xlim = c(-15,15)
+             )
+```
