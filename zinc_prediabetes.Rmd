@@ -119,3 +119,9 @@ meta::forest(beta,
              #xlim = c(-15,15)
              )
 ```
+
+
+```{bash}
+cp zinc_prediabetes.html index.html
+```
+
