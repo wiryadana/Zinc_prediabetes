@@ -1,38 +1,64 @@
 ---
-title: "Zinc supplementation on Prediabetes"
-author: "Kadek Adit Wiryadana"
+title: "Peran suplementasi Zinc pada pasien prediabetes: Sebuah meta-analisis"
+author: "Ni Made Meilani"
 date: "`r Sys.time()`"
 output:
-  pdf_document: default
   html_document: 
     code_folding: hide
+  pdf_document: default
+bibliography: ["Zinc_prediabetes.bib", "packages.bib"]
+csl: nature.csl
 ---
 
-## Preparation
-### Load package
+# Abstrak
+**Latar Belakang dan Tujuan :** Internasional Diabetes Federation (IDF) memperkirakan terjadi lonjakan kasus prediabetes yaitu hingga 398 juta kasus pada tahun 2030. Prevalensi prediabetes pada tahun 2019 diduduki oleh China pada posisi pertama disusul oleh Indonesia pada posisi ketiga dengan kasus sebanyak 29,1 juta orang. Studi menunjukkan jika insiden diabetes dikaitkan dengan defisiensi mikronutrien, salah satunya zinc. Zinc dikatakan memiliki kemampuan dalam membantu sintesis, penyimpanan, sekresi dan aksi hormon insulin. Tujuan dari tinjauan sistematis ini adalah untuk menilai peran suplementasi zinc pada pasien prediabetes.
+
+**Metode:** Penulis mencari literatur di Google Scholar, Pubmed dan Cochrane Library. Pemilihan literatur menggunakan pedoman PRISMA. Kriteria inklusi yang digunakan adalah studi berupa uji klinis yang menganalisis peran suplementasi zinc pada pasien prediabetes serta studi yang diterbitkan dalam 10 tahun terakhir. Analisis yang digunakan adalah R (v4.3) dan Meta Packages.
+
+**Hasil:** Terdapat empat studi yang dipilih dengan total 437 pasien prediabetes. Hasil analisis menunjukkan suplementasi zinc memberikan hasil gula darah puasa lebih rendah (MD -4.98 : 95% CI -9.88;-0,07), resistensi insulin lebih rendah (MD -0.22 : 95% CI -0.43;-0.01) dan meningkatkan profil lipid HDL (MD 1.85 : 95% CI 0.85-2.86).
+
+**Kesimpulan:** Pada studi yang diangkat dalam tinjauan sistematis ini memang ditemukan peran positif dari suplementasi zinc bagi pasien prediabetes. Namun masih diperlukan penelitian lebih lanjut dengan jumlah sampel yang lebih besar serta durasi penelitian yang lebih panjang.
+
+**Kata Kunci:** suplementasi, zinc, prediabetes
+
+
+# Introduction
+
+
+# Methods
+## Search strategy and study inclusion
+An  electronic  search  of  the  literature  was carried   out   using   PubMed,   Cochrane Library, EuropePMC,    Google    Scholar,    Lens.org,   Dimensions   (up   until   April   2023)    to    identify    studies    relating    to    zinc suplementation and prediabetes. The   initial keywords   used   for   the   search   included   “zinc”, “zinc supplementation”,  “prediabetes”, “Impaired glucose tolerance”,     “impaired fasting glucose”.  In   addition,   we   manually   searched   review   articles   and   checked  reference  lists  of  original  articles  to  identify  studies  that  might  have  been  missed  from  the  electronic  search.  The  inclusion criteria were (a) original studies published  in  English,  reporting  data  on  the  zinc suplementation and its impact in prediabetes patients; (b) observational studies, and  (c)  human studies  on  individuals  aged  20+  years.  We  excluded  case-control and case series or case reports, studies    on    children    and   adolescents,    and   animal   studies.   The   meta-analysis   was   conducted   and   reported   based   on   Preferred  Items  for  Systematic  Reviews  and Meta-analysis (PRISMA) guidelines.[@prisma_2021]
+
+## Data extraction and synthesis
+Data extraction was done independently by two reviewers.  We  extracted  data  relating  to   study     characteristics,     specifically   authors, journal, year of publication, study design, age   group, number   of   participants, type of zinc suplementation, and various laboratory values including fasting plasma glucose, post-prandial glucose, HOMA insulin resistance, HOMA insulin sensitivity, HOMA beta-cell function, and lipid profile. If  more than one paper with the same data or results from a similar study were identified, only   the   one   that   accommodated   the   original and definitive data was included. This study utilized the mean difference (MD)   as   the   primary   effect   measure. As  for  the  meta-analysis,  a  random  effect   model   was   utilized   to   find   the   pooled mean difference across two groups when heterogeneity analysis indicate there are significant heterogeneity among the studies, otherwise a common effects model were utilized.
+
+## Risk of Bias and Quality Assement
+Bias assessment including the risk of bias (ROB) and publication bias were analysed using ROB-2 criteria and funnel plot respectively. ROB plot and funnel plot generated using R packages robvis and meta.[@robvis_2019; @meta]  
+
+## Statistical Analysis
+Data   preparation   and   analysis   were   conducted  in  R programming languange (v4.3)  and  Rstudio server (v2023.03) on   Ubuntu   Linux   Server   (v22.04).[@r-base; @rstudio_2023; @ubuntu_2023] Meta-analysis   specific   calculation   using   the   inverse   variant   method   and   forest   and   funnel   plot   generation   conducted   with Meta package.[@meta] PRISMA 2020 chart created with PRISMA2020 package.[@PRISMA2020] Additional software packages in data handling and analysis include R packages of tidyverse and googlesheet4.[@tidyverse; @googlesheets4]
+
+#### Load package
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(meta)
 library(googlesheets4)
 ```
 
-
-### Import Data
-
-#### Import data & save locally
+#### Import Data
+##### Import data & save locally
 ```{r eval=FALSE, include=FALSE}
 data <- read_sheet("https://docs.google.com/spreadsheets/d/1W4YqKc7r_4rf47tSD635Ztq8n4g3srQdw6eaFJYKi70/edit#gid=0")
 write_csv(data, "data.csv")
 
 ```
-
-#### Import data from local storage
+##### Import data from local storage
 ```{r message=FALSE, warning=FALSE}
 data <- read_csv("data.csv")
 #attach(data)
 ```
 
-### Analysis
+# Results
 
 #### Metanalysis Fasting Plasma Glucose
 
@@ -187,6 +213,11 @@ meta::forest(ldl,
              )
 ```
 
+# Discussion
+
+# Reference
+
+<div id="refs"></div>
 
 ```{bash}
 cp zinc_prediabetes.html index.html
