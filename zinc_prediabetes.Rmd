@@ -213,6 +213,14 @@ meta::forest(ldl,
              )
 ```
 
+### Funnel Plot
+
+```{r fig.align='center', fig.width=12}
+funnel(fpg,
+       studlab=TRUE)
+```
+
+
 # Discussion
 
 # Reference
